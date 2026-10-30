@@ -1,0 +1,214 @@
+From e2f99927a48578f3c6fec1d0aa9d73782d2688a2 Mon Sep 17 00:00:00 2001
+From: Alexander Arango <daarangov@ut.edu.co>
+Date: Fri, 30 Oct 2026 15:00:35 +0000
+Subject: [PATCH 3/3] =?UTF-8?q?Pendiente=203:=20unificar=20el=205%=20de=20?=
+ =?UTF-8?q?contraprestaci=C3=B3n=20y=20acotar=20lo=20que=20dice=20el=20hat?=
+ =?UTF-8?q?o=20regional?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+El 5% se leía como fijo en dos documentos y como variable en los demás. Queda
+unificado: el porcentaje es fijo y el monto varía con el EBITDA, por lo que
+puede ser bajo o nulo al inicio.
+
+Las 165.488 cabezas están bien sumadas, pero el estudio las presentaba como
+cobertura garantizada del 87% al 131%. Ese ratio supone que toda la saca
+regional llegaría a la planta. Se corrigió el estudio de demanda, el teaser, la
+prefactibilidad y R-24, y se dejaron anotadas las decisiones abiertas (definir
+EBITDA en la cláusula 9, anexar la fuente del ICA, estimar la captura real).
+
+Revisado por: A. Arango
+---
+ .../estructura-institucional-app-v1.md        |  2 +-
+ .../pba-libano-investment-teaser-v1.md        |  4 ++--
+ .../prefactibilidad-pba-libano-v1.md          |  4 ++--
+ .../matriz-riesgos-conpes-3714-v1.md          |  2 +-
+ ...udio-demanda-catchment-12-municipios-v1.md | 12 ++++++++--
+ .../presentacion-institucional-concejo-v1.md  |  2 +-
+ CHANGELOG.md                                  | 24 +++++++++++++++++++
+ README.md                                     |  8 +++----
+ 8 files changed, 45 insertions(+), 13 deletions(-)
+
+diff --git a/00_resumen_ejecutivo/estructura-institucional-app-v1.md b/00_resumen_ejecutivo/estructura-institucional-app-v1.md
+index c404d42..36bc607 100644
+--- a/00_resumen_ejecutivo/estructura-institucional-app-v1.md
++++ b/00_resumen_ejecutivo/estructura-institucional-app-v1.md
+@@ -39,7 +39,7 @@ graph TD
+ * **Etapa 3 — Factibilidad (Art. 2.2.2.1.5.5):**  
+   Elaboración de estudios geotécnicos, diseño de ingeniería de detalle, plan de manejo ambiental, levantamiento georreferenciado, modelo financiero cerrado y borrador de minuta de contrato.
+ * **Etapa 4 — Acuerdo de Condiciones (Art. 2.2.2.1.5.7):**  
+-  Negociación y suscripción de los términos contractuales finales, incluyendo niveles de servicio, fórmulas de ajuste tarifario y la contraprestación fija municipal del 5%.
++  Negociación y suscripción de los términos contractuales finales, incluyendo niveles de servicio, fórmulas de ajuste tarifario y la contraprestación municipal del 5% del EBITDA (porcentaje fijo; monto variable).
+ * **Etapa 5 — Publicación SECOP y Manifestación de Interés (Art. 2.2.2.1.5.11):**  
+   Publicación oficial del proyecto durante **cuatro (4) meses** en la plataforma pública de contratación (SECOP). Si ningún tercero calificado manifiesta interés, la entidad adjudica el contrato de forma **directa** al originador. Si un tercero calificado se presenta, se realiza un proceso de selección abreviada donde el originador ostenta el **derecho de preferencia** para igualar o mejorar la oferta (Art. 2.2.2.1.5.12).
+ 
+diff --git a/00_resumen_ejecutivo/pba-libano-investment-teaser-v1.md b/00_resumen_ejecutivo/pba-libano-investment-teaser-v1.md
+index 45eda43..d9a53e1 100644
+--- a/00_resumen_ejecutivo/pba-libano-investment-teaser-v1.md
++++ b/00_resumen_ejecutivo/pba-libano-investment-teaser-v1.md
+@@ -30,7 +30,7 @@ graph LR
+ 1. **Monopolio Sanitario Regulado:**  
+    El Decreto 2270 de 2012 y el Decreto 1975 de 2019 exigen que toda carne para consumo humano provenga exclusivamente de plantas con autorización sanitaria nacional. La estricta regulación sanitaria y los costos de capital impiden la proliferación de plantas clandestinas o municipales precarias, consolidando la demanda regional de forma cautiva.
+ 2. **Cuenca Ganadera Cautiva (12 Municipios / 165.488 Cabezas):**  
+-   El área de influencia directa abarca 12 municipios contiguos del norte del Tolima (Líbano, Murillo, Villahermosa, Santa Isabel, Armero-Guayabal, Lérida, Venadillo, Piedras, Anzoátegui, Ambalema, Herveo y Casabianca), que concentran un inventario bovino superior a **165.488 cabezas** (Censo Pecuario ICA 2023), ofreciendo una cobertura de materia prima de entre **87% y 131%** respecto al throughput máximo proyectado.
++   El área de influencia directa abarca 12 municipios contiguos del norte del Tolima (Líbano, Murillo, Villahermosa, Santa Isabel, Armero-Guayabal, Lérida, Venadillo, Piedras, Anzoátegui, Ambalema, Herveo y Casabianca), que concentran un inventario bovino de **165.488 cabezas** (Censo Pecuario ICA 2023, por anexar). Ese inventario equivale a entre **87% y 131%** del throughput de estado estable si toda la saca comercial regional llegara a la planta; la captura real aún no está acreditada (ver estudio de demanda).
+ 3. **Contrato de Concesión a Largo Plazo (30 Años):**  
+    Estructurado bajo la Ley 1508 de 2012 (Régimen de APP), modalidad de iniciativa privada sin desembolso de recursos públicos, otorgando exclusividad operativa sobre el activo municipal por tres décadas.
+ 4. **Predio de Propiedad Municipal con Soportes Contractuales Parciales:**  
+@@ -62,7 +62,7 @@ El proyecto supera el modelo tradicional de cobro exclusivo por degüello median
+ * **CapEx de Inversión Total:**  
+   * **$7.250M COP** aportados por la inversión privada para obras civiles, línea mecanizada de faenado, cuartos fríos y PTAR.  
+   * **$15.350M COP** de CapEx total ciclo de vida a 29 años (incluyendo reinversiones operativas y reposición de equipos), superando el umbral legal de 6.000 SMMLV.
+-* **Contraprestación Municipal:** **5% de EBITDA** pagadero al Municipio del Líbano, fijado contractualmente.
++* **Contraprestación Municipal:** **5% del EBITDA** pagadero al Municipio del Líbano. El porcentaje está fijado en la minuta (cláusula 9); el monto depende del EBITDA de cada período y puede ser bajo o nulo mientras este sea bajo o negativo.
+ * **Estructura Societaria:**  
+   * Concesionario Operativo: **PBA Líbano S.A.S.** (empresa receptora colombiana).  
+   * Originador / Gestor Operativo: **Ecobank Development Colombia S.A.S.**  
+diff --git a/02_expediente_app_concesion/prefactibilidad-pba-libano-v1.md b/02_expediente_app_concesion/prefactibilidad-pba-libano-v1.md
+index e551a69..1a45960 100644
+--- a/02_expediente_app_concesion/prefactibilidad-pba-libano-v1.md
++++ b/02_expediente_app_concesion/prefactibilidad-pba-libano-v1.md
+@@ -23,7 +23,7 @@
+ 1. **Objeto:** Concesión para la rehabilitación, reforzamiento estructural, reposición de maquinaria, modernización tecnológica, operación, mantenimiento, organización y explotación económica a **30 años** de la Planta de Beneficio Animal del Municipio de Líbano, Tolima.
+ 2. **Infraestructura Existente:** El proyecto se ejecuta sobre infraestructura física existente de propiedad del Municipio (Decreto 1082, Art. 2.2.2.1.5.1 §2), con retribución derivada de la explotación económica del activo.
+ 3. **Categoría Sanitaria:** **Categoría Nacional** ante INVIMA (Decreto 2270 de 2012, Art. 11), habilitada para abastecer el consumo del municipio de Líbano y distribuir carne y subproductos a los municipios del norte del Tolima y mercados nacionales.
+-4. **Contraprestación Municipal:** **5% fijo del EBITDA**, transferido periódicamente a la Administración Municipal de Líbano.
++4. **Contraprestación Municipal:** **5% del EBITDA** (porcentaje fijado en la minuta, cláusula 9; el monto varía con el resultado del proyecto), transferido periódicamente a la Administración Municipal de Líbano.
+ 
+ ---
+ 
+@@ -58,7 +58,7 @@ Conforme al Decreto 1082 de 2015 (Art. 2.2.2.1.4.3), la evaluación económica s
+ 
+ ## 5. Estimación de Demanda y Mercado Cautivo
+ 
+-* **Área de Captación (Catchment):** 12 municipios contiguos del norte del Tolima con un inventario pecuario consolidado de **165.488 bovinos** (ICA 2023).
++* **Área de Captación (Catchment):** 12 municipios contiguos del norte del Tolima con un inventario pecuario de **165.488 bovinos** (ICA 2023, fuente por anexar).
+ * **Demanda Cautiva:** El cierre de plantas no conformes y el cumplimiento estricto del Decreto 2270 de 2012 concentra la demanda formal en la planta del Líbano, que cuenta con una ubicación geográfica estratégica respecto a la red vial del norte del departamento.
+ 
+ ---
+diff --git a/03_anexos_tecnicos_y_ambientales/matriz-riesgos-conpes-3714-v1.md b/03_anexos_tecnicos_y_ambientales/matriz-riesgos-conpes-3714-v1.md
+index bb6bc49..31673fb 100644
+--- a/03_anexos_tecnicos_y_ambientales/matriz-riesgos-conpes-3714-v1.md
++++ b/03_anexos_tecnicos_y_ambientales/matriz-riesgos-conpes-3714-v1.md
+@@ -95,7 +95,7 @@ Bajo la modalidad de iniciativa privada pura sin desembolso de recursos público
+ 
+ | Código | Riesgo Tipificado | Descripción del Evento | Etapa | Prob. | Imp. | Asignación | Mecanismo de Mitigación y Compensación |
+ |:------:|-------------------|------------------------|:-----:|:-----:|:----:|:----------:|-----------------------------------------|
+-| **R-24** | Volumen de Faenamiento por Debajo de Proyecciones | Demanda regional insuficiente para alcanzar el punto de equilibrio operativo. | Operación | Baja | Medio | **Privado** | Catchment cuantificado de 12 municipios (165.488 cabezas de inventario ganadero regional). Monopolio sanitario legal que exige beneficio en plantas autorizadas. Cobertura del 87% al 131% del throughput de estado estable (80 reses/día). |
++| **R-24** | Volumen de Faenamiento por Debajo de Proyecciones | Demanda regional insuficiente para alcanzar el punto de equilibrio operativo. | Operación | Baja | Medio | **Privado** | Catchment cuantificado de 12 municipios (165.488 cabezas de inventario ganadero regional). Monopolio sanitario legal que exige beneficio en plantas autorizadas. Oferta regional equivalente al 87% al 131% del throughput de estado estable (80 reses/día) si toda la saca llegara a la planta; la captura real no está acreditada (ver estudio de demanda). |
+ 
+ ---
+ 
+diff --git a/04_mercado_y_respaldo_institucional/estudio-demanda-catchment-12-municipios-v1.md b/04_mercado_y_respaldo_institucional/estudio-demanda-catchment-12-municipios-v1.md
+index 1c10afa..fef1d77 100644
+--- a/04_mercado_y_respaldo_institucional/estudio-demanda-catchment-12-municipios-v1.md
++++ b/04_mercado_y_respaldo_institucional/estudio-demanda-catchment-12-municipios-v1.md
+@@ -11,7 +11,7 @@
+ El dimensionamiento de mercado de la Planta de Beneficio Animal (PBA) de Líbano se fundamenta en un análisis de demanda estructural cautiva impulsada por tres factores convergentes:
+ 1. **Déficit Sanitario Regional Generalizado:** De los 47 municipios del departamento del Tolima, la gran mayoría carece de plantas de faenamiento habilitadas por el INVIMA o presentan porcentajes de cumplimiento técnico precarios.
+ 2. **Cercanía y Centralidad Logística:** Líbano constituye el nodo articulador natural de las subregiones de la Cordillera Central y el Valle del Magdalena en el norte del Tolima.
+-3. **Catchment Ganadero Sólido (12 Municipios):** Un inventario de **165.488 cabezas de ganado bovino** registrado en el Censo Pecuario Oficial del ICA, que garantiza una cobertura de entre el **87% y el 131%** del volumen proyectado en estado estable (80 reses/día), sin requerir captación fuera de su área de influencia inmediata.
++3. **Catchment Ganadero Sólido (12 Municipios):** Un inventario de **165.488 cabezas de ganado bovino** registrado en el Censo Pecuario Oficial del ICA, que equivale a entre el **87% y el 131%** del volumen proyectado en estado estable (80 reses/día) **si toda la saca comercial de los 12 municipios llegara a la planta**. Esa captura no está acreditada (ver Nota de revisión, sección 3).
+ 
+ ---
+ 
+@@ -61,7 +61,15 @@ Aplicando las tasas técnicas conservadoras de extracción y rotación comercial
+ ```
+ 
+ ### Conclusión Técnica de Demanda:
+-El área de influencia directa genera suficiente oferta animal para operar a capacidad de estado estable **exclusivamente con la saca comercial de los municipios del catchment**, confirmando que el proyecto no depende de atraer ganado de otras regiones o departamentos distantes.
++El stock bovino del área de influencia es, en teoría, suficiente para el volumen de estado estable, **siempre que la planta capture una parte significativa de la saca comercial de los municipios del catchment**. La cobertura de 87% a 131% es un ratio de **oferta regional total frente a demanda de la planta**, no una proyección de ventas: la tasa de captura real depende de plantas competidoras, faenamiento informal, consumo en finca y destinos de venta fuera de la zona, y no está acreditada en este documento.
++
++> **Nota de revisión (Revisión 3, 12 de octubre de 2026):**
++> - *Aritmética verificada:* los totales de la tabla (165.488 bovinos; 132.968 habitantes), la demanda de 22.800 reses/año (80 × 285) y las coberturas de 87%, 109% y 131% son correctos.
++> - *Fuente por anexar:* el «Censo ICA 2023» figura sin enlace ni extracto. El ICA publica anualmente el censo bovino por municipio; falta anexar la consulta o el archivo que respalde las 12 cifras.
++> - *Tasa de extracción:* el 12% a 18% anual se presenta como «tasa técnica conservadora» sin fuente. Debe citarse o presentarse como supuesto.
++> - *Captura sin descontar:* el ratio supone que el 100% de la saca regional llega a esta planta. Con solo los municipios a 40 km o menos (Líbano, Villahermosa, Santa Isabel, Murillo, Casabianca y Lérida: 66.413 cabezas), la cobertura es de 35%, 44% y 52% a tasas de 12%, 15% y 18%.
++> - *Coherencia interna:* el catchment incluye municipios a más de 2 horas de Líbano (Piedras y Anzoátegui), mientras la sección 4.2 sostiene que un flete de 2 a 4 horas a Honda o Ibagué genera mermas y sobrecostos. Conviene acotar el catchment primario o explicar por qué la lógica no aplica.
++> - *Población:* verificar contra DANE las proyecciones usadas (por ejemplo, Líbano 33.262 en 2024); una fuente secundaria reporta una cifra mayor para 2023.
+ 
+ ---
+ 
+diff --git a/04_mercado_y_respaldo_institucional/presentacion-institucional-concejo-v1.md b/04_mercado_y_respaldo_institucional/presentacion-institucional-concejo-v1.md
+index cc12f9f..eeb339c 100644
+--- a/04_mercado_y_respaldo_institucional/presentacion-institucional-concejo-v1.md
++++ b/04_mercado_y_respaldo_institucional/presentacion-institucional-concejo-v1.md
+@@ -72,7 +72,7 @@ El trámite ante el Concejo se apoya en la estricta secuencia de controles previ
+ 
+ La materialización de la APP reporta ventajas directas para el erario público y la comunidad:
+ - **Cero Impacto Fiscal:** El Municipio no compromete transferencias del Sistema General de Participaciones (SGP) ni adquiere deuda pública.
+-- **Flujo de Ingresos Municipales:** Percepción del 5% del EBITDA del proyecto, generando una fuente recurrente de ingresos no tributarios para inversión social.
++- **Flujo de Ingresos Municipales:** Percepción del 5% del EBITDA del proyecto, una fuente periódica de ingresos no tributarios para inversión social. Es un monto variable: depende del EBITDA de cada período y puede ser bajo o nulo mientras este sea bajo o negativo (por ejemplo, en el arranque).
+ - **Salud Pública e Higiene:** Erradicación del faenamiento clandestino y garantía de carne inocua bajo vigilancia permanente del INVIMA.
+ - **Saneamiento Ambiental:** Construcción de una PTAR moderna y biodigestor con tecnología UASB que erradica vertimientos contaminantes a los ríos de la cuenca local.
+ - **Generación de Empleo Formal:** Preferencia contractual para la contratación de mano de obra y proveedores libanenses (mínimo 80%).
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 3611137..41f1e0c 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,29 @@
+ # Registro de Revisiones
+ 
++## 2026-10-30 — Revisión 3: el 5% de contraprestación y el hato regional (pendiente 3) · CERRADO CON DECISIONES ABIERTAS
++
++Revisado por: A. Arango. Alcance: todas las menciones del 5% y de las 165.488 cabezas en el data room. El pendiente 4 sigue abierto.
++
++### El 5% de contraprestación
++- **Hallazgo:** la minuta (cláusula 9), el estudio de factibilidad, el teaser y la presentación al Concejo dicen «5% del EBITDA». Pero la prefactibilidad decía «5% fijo del EBITDA» y la estructura institucional «contraprestación fija del 5%», lo cual se lee como un canon fijo. La presentación al Concejo contrasta el 5% con un «canon fijo», es decir, entiende que es variable.
++- **Unificado:** el porcentaje es fijo (5%, fijado en la minuta) y el monto es variable porque depende del EBITDA. Se corrigieron prefactibilidad, estructura institucional, teaser y presentación al Concejo.
++- **Alcance:** se retiró «fuente recurrente», porque un pago sobre EBITDA puede ser bajo o nulo mientras el EBITDA sea bajo o negativo.
++
++### El hato de 165.488 cabezas
++- **Aritmética correcta:** 165.488 bovinos, 132.968 habitantes, demanda de 22.800 reses/año y coberturas de 87%, 109% y 131%.
++- **Lo que no se sostiene:** el estudio decía que el hato «garantiza» y «confirma» la cobertura. En realidad es oferta regional total contra demanda de la planta, sin descontar plantas competidoras, faenamiento informal ni otros destinos. Solo con los municipios a 40 km o menos (66.413 cabezas) la cobertura sería de 35% a 52%.
++- **Corregido:** estudio de demanda (resumen, conclusión y nota de revisión), teaser, prefactibilidad y R-24, que dejan de presentar el ratio como cobertura asegurada.
++
++### Decisiones abiertas (requieren documentos o criterio del equipo)
++- **Cláusula 9 de la minuta:** no define «EBITDA» (base contable, auditoría, ajustes, tratamiento de EBITDA negativo, periodicidad, derecho de verificación del Municipio). Se dejó sin modificar por ser decisión de redacción contractual.
++- **Fuente ICA 2023:** anexar el archivo o la consulta que respalde las 12 cifras municipales.
++- **Tasa de extracción 12%–18%:** citar fuente o declararla supuesto.
++- **Tasa de captura:** estimarla o probarla con encuestas, cartas de intención de ganaderos o inventario de plantas competidoras.
++- **Catchment:** acotar a municipios cercanos o justificar Piedras y Anzoátegui (más de 2 horas).
++- **R-24 (volumen de faenamiento):** hoy Baja/Medio, apoyada en una cobertura no acreditada. Se sugiere revisarla a Media; no se cambió.
++- **Población:** cotejar las proyecciones DANE usadas.
++- **Modelo financiero:** no está en la sala; confirmar con él el efecto del 5% en los primeros años.
++
+ ## 2026-10-12 — Revisión 3: alcance de «cero rechazo» y «cero contratos» (pendiente 2) · CERRADO
+ 
+ Revisado por: A. Arango. Rama `ruapp-data-room3-mlx`. Alcance: cotejo de los tres soportes oficiales (AL-RS-2026-00005383, AL-RS-2026-00005653 y FO-GDC-A03-13) contra sus PDF y contra todas las afirmaciones del data room que los citan. Los pendientes 3 y 4 siguen abiertos.
+diff --git a/README.md b/README.md
+index 8ae3892..5df6045 100644
+--- a/README.md
++++ b/README.md
+@@ -29,7 +29,7 @@ Este espacio compila la totalidad de los antecedentes jurídicos, títulos predi
+ │
+ ├── 00_resumen_ejecutivo/                          <-- Visión general, tesis de inversión y arquitectura APP
+ │   ├── pba-libano-investment-teaser-v1.md         <-- Teaser de inversión (fuera del alcance municipal; ver aviso en el documento)
+-│   └── estructura-institucional-app-v1.md         <-- Marco normativo: Ley 1508/2012, 30 años, 5% contraprestación
++│   └── estructura-institucional-app-v1.md         <-- Marco normativo: Ley 1508/2012, 30 años, 5% del EBITDA
+ │
+ ├── registro_revisiones/                           <-- Notas internas de cada revisión (no es parte del expediente)
+ ├── 01_titulos_y_seguridad_juridica/               <-- Cadena de títulos, predio y certificaciones oficiales
+@@ -71,8 +71,8 @@ Estado según la revisión interna del 12 de octubre de 2026 (Revisión 3). «Co
+ 
+ | Documento | Estado de revisión |
+ |---|---|
+-| `00` Estructura institucional APP | Sin revisión de fondo (pendiente: plazo, prórroga) |
+-| `00` Teaser de inversión | Con observaciones (ítem 4 corregido en Rev. 3; pendiente: 5%) |
++| `00` Estructura institucional APP | Redacción del 5% unificada (Rev. 3); pendiente: plazo, prórroga (pendiente 4) |
++| `00` Teaser de inversión | Con observaciones (ítems 2 y 4 y contraprestación corregidos en Rev. 3) |
+ | `01` Informe de títulos 364-917 | Con observaciones (soporte 2018) |
+ | `01` Plan de reconciliación de cabida | Con observaciones (área adicional sin título) |
+ | `01` Escritura 1860 (PDF compilado) | Con observaciones (copia ilegible; compilado) |
+@@ -84,7 +84,7 @@ Estado según la revisión interna del 12 de octubre de 2026 (Revisión 3). «Co
+ | `03` Matriz de riesgos CONPES 3714 | Revisado R-08, R-12, R-34, R-35, R-42; conteo de 39 riesgos verificado |
+ | `03` Sustentación de suficiencia de mecanismos (76%) | Sin revisión de fondo (incorporada al índice en la Revisión 3; choca con «plazo improrrogable», pendiente 4) |
+ | `03` Demás anexos técnicos y ambientales | Sin revisión de fondo |
+-| `04` Estudio de demanda · Presentación al Concejo | Sin revisión de fondo (pendiente 3) |
++| `04` Estudio de demanda · Presentación al Concejo | Con observaciones (Rev. 3, pendiente 3): cifras verificadas; fuente ICA por anexar; captura no acreditada; 5% unificado |
+ 
+ ---
+ 
+-- 
+2.43.0
